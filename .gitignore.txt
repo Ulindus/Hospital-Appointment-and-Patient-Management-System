@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# User-specific
+*.user
+*.suo
+*.rsuser
+
+# Build
+[Dd]ebug/
+[Rr]elease/
+.vs/
+*.suo
+bin/
+obj/

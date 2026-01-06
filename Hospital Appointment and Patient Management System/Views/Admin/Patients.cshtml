@@ -1,0 +1,44 @@
+﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.Patient>
+
+@{
+    ViewData["Title"] = "Patients";
+}
+
+<h3 class="mb-4">Patients</h3>
+
+<div class="card p-3">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        No patients found
+                    </td>
+                </tr>
+            }
+            else
+            {
+                int i = 1;
+                foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@p.Name</td>
+                        <td>@p.Gender</td>
+                        <td>@p.Phone</td>
+                    </tr>
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
