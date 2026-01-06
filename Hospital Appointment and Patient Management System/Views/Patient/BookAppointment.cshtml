@@ -1,0 +1,36 @@
+﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.Doctor>
+
+<h3 class="mb-4">Book Appointment</h3>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Doctor</th>
+            <th>Specialization</th>
+            <th>Available Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.Name</td>
+                <td>@d.Specialization</td>
+                <td>@d.AvailableTime</td>
+                <td>
+                    <form asp-action="CreateAppointment" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="doctorId" value="@d.Id" />
+                        <input type="date" name="date" class="form-control" required />
+                        <input type="text" name="time" class="form-control"
+                               placeholder="10:00 AM" required />
+                        <button class="btn btn-success btn-sm">
+                            Book
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.Appointment>
+
+<h3 class="mb-4">My Appointments</h3>
+
+<table class="table table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Doctor</th>
+            <th>Specialization</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Date.ToShortDateString()</td>
+                <td>@a.Time</td>
+                <td>@a.Doctor?.Name</td>
+                <td>@a.Doctor?.Specialization</td>
+                <td>
+                    <span class="badge bg-secondary">@a.Status</span>
+                </td>
+                <td>
+                    @if (a.Status == "Pending")
+                    {
+                        <form asp-action="CancelAppointment" method="post">
+                            <input type="hidden" name="id" value="@a.AppointmentId" />
+                            <button class="btn btn-danger btn-sm">
+                                Cancel
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
