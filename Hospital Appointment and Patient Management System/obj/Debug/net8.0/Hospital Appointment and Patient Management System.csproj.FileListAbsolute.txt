@@ -143,8 +143,8 @@ C:\Users\powertec\source\repos\Hospital Appointment and Patient Management Syste
 C:\Users\powertec\source\repos\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\appsettings.json
-C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.staticwebassets.endpoints.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.staticwebassets.runtime.json
+C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.staticwebassets.endpoints.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.exe
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.deps.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\bin\Debug\net8.0\Hospital Appointment and Patient Management System.runtimeconfig.json
@@ -266,6 +266,7 @@ C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hos
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.RazorAssemblyInfo.cache
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.RazorAssemblyInfo.cs
+C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.sourcelink.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -284,4 +285,3 @@ C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hos
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.pdb
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.genruntimeconfig.cache
 C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\ref\Hospital Appointment and Patient Management System.dll
-C:\Users\powertec\Desktop\Hospital Appointment and Patient Management System\Hospital Appointment and Patient Management System\obj\Debug\net8.0\Hospital Appointment and Patient Management System.sourcelink.json

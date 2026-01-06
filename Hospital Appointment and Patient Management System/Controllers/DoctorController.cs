@@ -30,7 +30,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(d => d.Email == user.Email);
+                .FirstOrDefaultAsync(d => d.IdentityUserId == user.Id);
 
             if (doctor == null)
                 return Unauthorized();

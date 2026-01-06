@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Patient Registration";
+}
+
+<div class="container mt-5" style="max-width:450px;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Patient Registration</h3>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post" asp-action="RegisterPatient" asp-controller="Account">
+
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Register
+                </button>
+            </form>
+
+            <div class="text-center mt-3">
+                <a href="/Account/Login">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+</div>

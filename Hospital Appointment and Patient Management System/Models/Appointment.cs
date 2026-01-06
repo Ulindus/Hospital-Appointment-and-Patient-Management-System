@@ -11,13 +11,13 @@ namespace Hospital_Appointment_and_Patient_Management_System.Models
         public DateTime Date { get; set; }
 
         public string Time { get; set; } = string.Empty;
-
         public string Status { get; set; } = string.Empty;
 
         public int DoctorId { get; set; }
-        public Doctor Doctor { get; set; } = null!;
+        public Doctor Doctor { get; set; }
 
         public int PatientId { get; set; }
-        public Patient Patient { get; set; } = null!;
+        public Patient Patient { get; set; }
     }
+
 }

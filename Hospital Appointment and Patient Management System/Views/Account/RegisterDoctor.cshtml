@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Register Doctor";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h3 class="text-center mb-4">Register Doctor</h3>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form asp-action="RegisterDoctor" asp-controller="Account" method="post">
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Doctor Name</label>
+                        <input type="text" name="name" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Specialization</label>
+                        <input type="text" name="specialization" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Available Time</label>
+                        <input type="text" name="availableTime" class="form-control" placeholder="09:00 AM - 05:00 PM" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Register Doctor
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Login" asp-controller="Account">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
