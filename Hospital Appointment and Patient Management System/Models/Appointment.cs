@@ -12,7 +12,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Models
 
         public string Time { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
-
+        public int QueueNumber { get; set; }
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
 

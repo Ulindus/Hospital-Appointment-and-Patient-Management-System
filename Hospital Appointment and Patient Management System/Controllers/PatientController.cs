@@ -45,7 +45,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
         // ===================== CREATE APPOINTMENT =====================
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(
-            int doctorId, DateTime date, string time)
+    int doctorId, DateTime date, string time)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -55,20 +55,29 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             if (patient == null)
                 return Unauthorized();
 
+            // 🔢 Generate queue number (per doctor per day)
+            int queueNumber = await _context.Appointments
+                .Where(a => a.DoctorId == doctorId && a.Date.Date == date.Date)
+                .CountAsync() + 1;
+
             var appointment = new Appointment
             {
                 DoctorId = doctorId,
                 PatientId = patient.PatientId,
                 Date = date,
                 Time = time,
-                Status = "Pending"
+                Status = "Pending",
+                QueueNumber = queueNumber   // ✅ ASSIGNED
             };
 
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Appointments");
+            TempData["QueueNumber"] = queueNumber;
+
+            return RedirectToAction("AppointmentSuccess");
         }
+
 
         // ===================== MY APPOINTMENTS =====================
         public async Task<IActionResult> Appointments()
@@ -88,6 +97,12 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             return View(appointments);
         }
+        public IActionResult AppointmentSuccess(int appointmentNumber)
+        {
+            ViewBag.AppointmentNumber = appointmentNumber;
+            return View();
+        }
+
 
         // ===================== CANCEL APPOINTMENT =====================
         [HttpPost]
