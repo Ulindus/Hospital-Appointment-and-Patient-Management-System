@@ -19,6 +19,28 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    string adminEmail = "admin@hospital.com";
+    string adminPassword = "Admin@123";
+
+    var admin = await userManager.FindByEmailAsync(adminEmail);
+
+    if (admin == null)
+    {
+        admin = new IdentityUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
+
+        await userManager.CreateAsync(admin, adminPassword);
+        await userManager.AddToRoleAsync(admin, "Admin");
+    }
+}
 
 // --------------------
 // 🔽 THIS IS THE PART YOU WERE ASKING "WHERE"

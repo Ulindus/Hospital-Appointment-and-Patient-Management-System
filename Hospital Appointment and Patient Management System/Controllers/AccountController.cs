@@ -82,9 +82,11 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
         // POST: /Account/RegisterPatient
         [HttpPost]
         public async Task<IActionResult> RegisterPatient(
-            string email,
-            string password,
-            string name)
+     string name,
+     string gender,
+     string phone,
+     string email,
+     string password)
         {
             var user = new IdentityUser
             {
@@ -105,6 +107,8 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             var patient = new Patient
             {
                 Name = name,
+                Gender = gender,
+                Phone = phone,
                 IdentityUserId = user.Id
             };
 
@@ -113,6 +117,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             return RedirectToAction("Login");
         }
+
 
         // POST: /Account/RegisterDoctor
         [HttpPost]
