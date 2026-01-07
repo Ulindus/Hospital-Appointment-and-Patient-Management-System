@@ -1,62 +1,145 @@
 ﻿@{
-    Layout = null;
+    Layout = "_LandingLayout";
+    ViewData["Title"] = "Home";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Hospital Appointment System</title>
+<!-- HERO SECTION -->
+<section class="hero-section text-white">
+    <div class="container-fluid hero-content">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="fw-bold mb-3">
+                    Hospital Appointment <br /> & Patient Management System
+                </h1>
+                <p class="mb-4">
+                    Book appointments, manage doctors, and streamline hospital operations
+                    with a modern digital solution.
+                </p>
 
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
+                <a asp-controller="Account" asp-action="Login" class="btn btn-light btn-lg me-2">
+                    Login
+                </a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-light btn-lg">
+                    Register
+                </a>
+            </div>
 
-        .hero {
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1576765607924-b6b56f3f6b88');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-
-            .hero h1 {
-                font-size: 3rem;
-                font-weight: 700;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-                max-width: 700px;
-                margin: 20px auto;
-            }
-    </style>
-</head>
-
-<body>
-    <div class="hero">
-        <div>
-            <h1>Hospital Appointment & Patient Management</h1>
-            <p>
-                A modern platform to book appointments, manage patients,
-                and streamline hospital operations.
-            </p>
-
-            <a asp-controller="Account"
-               asp-action="Login"
-               class="btn btn-primary btn-lg px-5 mt-3">
-                Get Started
-            </a>
+           <!-- <div class="col-md-6 text-center">
+                <img src="~/images/hero-hospital.png" class="img-fluid" alt="Hospital">
+             </div>-->
         </div>
     </div>
-</body>
-</html>
+</section>
+
+<!-- FEATURES -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Key Features</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h5>📅 Online Appointments</h5>
+                    <p>Patients can easily book and cancel appointments online.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h5>👨‍⚕️ Doctor Management</h5>
+                    <p>Manage doctor schedules, specializations, and availability.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <h5>📊 Admin Dashboard</h5>
+                    <p>Full control over patients, doctors, appointments, and reports.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">How It Works</h2>
+
+        <div class="row text-center">
+            <div class="col-md-4">
+                <h4>1️⃣ Register</h4>
+                <p>Create an account as a patient or doctor.</p>
+            </div>
+            <div class="col-md-4">
+                <h4>2️⃣ Book</h4>
+                <p>Select a doctor and book an appointment instantly.</p>
+            </div>
+            <div class="col-md-4">
+                <h4>3️⃣ Manage</h4>
+                <p>Track appointments and receive a queue number.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- USER ROLES -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">System Roles</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="role-card">
+                    <h5>Admin</h5>
+                    <ul>
+                        <li>Manage doctors</li>
+                        <li>View all patients</li>
+                        <li>Approve appointments</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="role-card">
+                    <h5>Doctor</h5>
+                    <ul>
+                        <li>View daily appointments</li>
+                        <li>Approve / reject bookings</li>
+                        <li>Update schedule</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="role-card">
+                    <h5>Patient</h5>
+                    <ul>
+                        <li>View doctors</li>
+                        <li>Book appointments</li>
+                        <li>Receive queue number</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section text-white text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-3">Ready to Get Started?</h2>
+
+        <p class="mb-4">
+            Login now and manage hospital appointments efficiently.
+        </p>
+
+        <a asp-controller="Account"
+           asp-action="Login"
+           class="btn btn-light btn-lg px-4">
+            Get Started
+        </a>
+    </div>
+</section>
+
