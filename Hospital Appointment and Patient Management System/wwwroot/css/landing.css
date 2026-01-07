@@ -1,0 +1,38 @@
+﻿.hero-section {
+    width: 100vw;
+    min-height: 50vh; /* FULL SCREEN HEIGHT */
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+}
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 8%;
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+}
+
+
+.feature-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.role-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+    .role-card ul {
+        padding-left: 18px;
+    }
+
+.cta-section {
+    background: (135deg, #0f172a, #1e40af);
+    padding: 60px 0;
+}
