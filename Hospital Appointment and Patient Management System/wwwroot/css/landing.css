@@ -1,0 +1,146 @@
+﻿/* RESET GAP ISSUE */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* HERO */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 8%;
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    color: #ffffff;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #cbd5e1;
+    margin-bottom: 30px;
+}
+
+.hero-actions a {
+    margin-right: 15px;
+}
+
+.hero-image img {
+    max-width: 480px;
+    width: 100%;
+}
+
+/* FEATURES */
+.features {
+    padding: 80px 8%;
+    background: #f8fafc;
+    text-align: center;
+}
+
+    .features h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 50px;
+    }
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* CTA */
+.cta {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    color: white;
+}
+
+    .cta h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .cta p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+/* NAVBAR */
+.main-navbar {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 8%;
+}
+
+.nav-logo a {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin: 0;
+}
+
+    .nav-links li a {
+        color: #e5e7eb;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+        .nav-links li a:hover {
+            color: #ffffff;
+        }
+
+.btn-nav {
+    padding: 8px 18px;
+    border: 1px solid #ffffff;
+    border-radius: 6px;
+    color: #ffffff !important;
+}
+
+    .btn-nav:hover {
+        background: #ffffff;
+        color: #1e40af !important;
+    }
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 🔥 THIS removes side gaps */
+}

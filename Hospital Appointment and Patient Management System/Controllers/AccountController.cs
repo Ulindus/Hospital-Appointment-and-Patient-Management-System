@@ -56,6 +56,11 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        // GET: /Account/Register
+        public IActionResult Register()
+        {
+            return View();
+        }
 
         // ===================== LOGOUT =====================
 

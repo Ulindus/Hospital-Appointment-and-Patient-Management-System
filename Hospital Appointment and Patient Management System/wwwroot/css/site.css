@@ -20,3 +20,49 @@ html {
 body {
   margin-bottom: 60px;
 }
+body {
+    margin: 0;
+    padding: 0;
+}
+/* ===== FIX WHITE SPACE LEFT & RIGHT ===== */
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container,
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Hero full width */
+.hero,
+.hero-section {
+    width: 100%;
+}
+/* ABOUT PAGE */
+
+.about-hero {
+    background: linear-gradient(135deg, #0f172a, #1e40af);
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
+.about-content {
+    padding: 70px 0;
+}
+
+.about-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
