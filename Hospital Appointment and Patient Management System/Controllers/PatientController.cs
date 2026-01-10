@@ -21,7 +21,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             _userManager = userManager;
         }
 
-        // ===================== DASHBOARD =====================
+        
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -35,14 +35,14 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View(patient);
         }
 
-        // ===================== VIEW DOCTORS =====================
+    
         public async Task<IActionResult> BookAppointment()
         {
             var doctors = await _context.Doctors.ToListAsync();
             return View(doctors);
         }
 
-        // ===================== CREATE APPOINTMENT =====================
+        
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(
             int doctorId, DateTime date, string time)

@@ -43,10 +43,40 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View(appointments);
         }
 
-        // Schedule
+        
         public IActionResult Schedule()
         {
             return View();
+        }
+
+       
+        
+        [HttpPost]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> Schedule(string[] AvailableDays, string AvailableTime)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var doctor = await _context.Doctors
+                .FirstOrDefaultAsync(d => d.IdentityUserId == user.Id);
+
+            if (doctor == null)
+                return Unauthorized();
+
+            // Save selected days
+            if (AvailableDays != null && AvailableDays.Length > 0)
+            {
+                doctor.AvailableDays = string.Join(", ", AvailableDays);
+            }
+
+            // Save time
+            doctor.AvailableTime = AvailableTime;
+
+            _context.Doctors.Update(doctor);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Schedule saved successfully!";
+            return RedirectToAction("Index");
         }
     }
 }

@@ -21,8 +21,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             _context = context;
         }
 
-        // ===================== LOGIN =====================
-
+        // LOGIN 
         // GET: /Account/Login
         public IActionResult Login()
         {
@@ -62,7 +61,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View();
         }
 
-        // ===================== LOGOUT =====================
+        //  LOGOUT
 
         public async Task<IActionResult> Logout()
         {
@@ -70,8 +69,8 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return RedirectToAction("Login");
         }
 
-        // ===================== REGISTER DOCTOR =====================
-        // (Recommended: Admin uses this)
+        // REGISTER DOCTOR 
+        
 
         // GET: /Account/RegisterDoctor
         public IActionResult RegisterDoctor()
@@ -152,7 +151,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
                 Name = name,
                 Specialization = specialization,
                 AvailableTime = availableTime,
-                IdentityUserId = user.Id   // 🔑 CRITICAL LINK
+                IdentityUserId = user.Id   
             };
 
             _context.Doctors.Add(doctor);

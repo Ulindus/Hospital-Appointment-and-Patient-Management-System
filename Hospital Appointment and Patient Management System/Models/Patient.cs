@@ -11,10 +11,10 @@ namespace Hospital_Appointment_and_Patient_Management_System.Models
 
         public string Gender { get; set; } = string.Empty;
 
-        // ✅ ADD THIS (FIXES YOUR ERROR)
+        //  ADD THIS (FIXES YOUR ERROR)
         public string Phone { get; set; } = string.Empty;
 
-        // 🔑 Link to ASP.NET Identity
+        //  Link to ASP.NET Identity
         public string IdentityUserId { get; set; } = string.Empty;
     }
 }
