@@ -41,7 +41,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View(model);
         }
 
-        // ✅ NEW PATIENTS TAB ACTION
+        //  NEW PATIENTS TAB ACTION
         public async Task<IActionResult> Patients()
         {
             var patients = await _context.Patients.ToListAsync();
