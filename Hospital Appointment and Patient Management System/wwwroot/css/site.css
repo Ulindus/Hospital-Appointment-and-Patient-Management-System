@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -65,4 +65,47 @@ html, body {
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
+.card:hover {
+    transform: translateY(-3px);
+    transition: 0.3s ease;
+}
+.dashboard-wrapper {
+    max-width: 1000px;
+    margin: 40px auto; 
+    padding: 20px;
+}
+
+.welcome-card {
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: center; /* ✅ CENTER cards */
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    width: 320px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+    .dashboard-card h5 {
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .dashboard-card p {
+        color: #6c757d;
+        margin-bottom: 15px;
+    }
 

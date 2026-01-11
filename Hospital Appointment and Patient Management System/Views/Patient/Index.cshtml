@@ -1,19 +1,55 @@
-﻿<div class="d-flex gap-3 mt-4">
-    <a asp-controller="Patient"
-       asp-action="BookAppointment"
-       class="btn btn-primary btn-lg">
-        📅 Book Appointment
-    </a>
+﻿@{
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+    ViewData["Title"] = "Patient Dashboard";
+}
 
-    <a asp-controller="Patient"
-       asp-action="Appointments"
-       class="btn btn-outline-secondary btn-lg">
-        📄 My Appointments
-    </a>
+<div class="container mt-5">
 
-    <a asp-controller="Account"
-       asp-action="Logout"
-       class="btn btn-danger btn-lg">
-        🚪 Logout
-    </a>
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">👤 Patient Dashboard</h2>
+        <p class="text-muted">
+            Manage your appointments and bookings easily
+        </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="row justify-content-center g-4">
+
+        <!-- Book Appointment -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 text-center">
+                <div class="card-body p-4">
+                    <h4 class="mb-3">📅 Book Appointment</h4>
+                    <p class="text-muted">
+                        Choose a doctor and book your appointment
+                    </p>
+
+                    <a asp-action="BookAppointment"
+                       class="btn btn-primary w-100">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Appointments -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100 text-center">
+                <div class="card-body p-4">
+                    <h4 class="mb-3">📋 My Appointments</h4>
+                    <p class="text-muted">
+                        View and manage your booked appointments
+                    </p>
+
+                    <a asp-action="Appointments"
+                       class="btn btn-secondary w-100">
+                        View Appointments
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </div>

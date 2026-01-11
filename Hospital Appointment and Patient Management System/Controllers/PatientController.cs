@@ -21,31 +21,28 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             _userManager = userManager;
         }
 
-        
-        public async Task<IActionResult> Index()
+       
+        public IActionResult Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-
-            var patient = await _context.Patients
-                .FirstOrDefaultAsync(p => p.IdentityUserId == user.Id);
-
-            if (patient == null)
-                return Unauthorized();
-
-            return View(patient);
+            return View();
         }
 
-    
+        
         public async Task<IActionResult> BookAppointment()
         {
-            var doctors = await _context.Doctors.ToListAsync();
-            return View(doctors);
+            var schedules = await _context.DoctorSchedules
+                .Include(s => s.Doctor)
+                .Where(s => !s.IsBooked && s.Date >= DateTime.Today)
+                .OrderBy(s => s.Date)
+                .ThenBy(s => s.TimeSlot)
+                .ToListAsync();
+
+            return View(schedules);
         }
 
-
+        
         [HttpPost]
-        public async Task<IActionResult> CreateAppointment(
-    int doctorId, DateTime date, string time)
+        public async Task<IActionResult> CreateAppointment(int scheduleId)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -55,39 +52,26 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             if (patient == null)
                 return Unauthorized();
 
-            var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(d => d.Id == doctorId);
+            var schedule = await _context.DoctorSchedules
+                .Include(s => s.Doctor)
+                .FirstOrDefaultAsync(s => s.DoctorScheduleId == scheduleId);
 
-            if (doctor == null)
-                return NotFound();
-
-            
-            if (!string.IsNullOrEmpty(doctor.AvailableDays))
+            if (schedule == null || schedule.IsBooked)
             {
-                var selectedDay = date.DayOfWeek.ToString(); // Monday, Tuesday, etc.
-
-                var allowedDays = doctor.AvailableDays
-                    .Split(',')
-                    .Select(d => d.Trim())
-                    .ToList();
-
-                if (!allowedDays.Contains(selectedDay))
-                {
-                    TempData["Error"] =
-                        $"Doctor is not available on {selectedDay}. Available days: {doctor.AvailableDays}";
-                    return RedirectToAction("BookAppointment");
-                }
+                TempData["Error"] = "Schedule is no longer available.";
+                return RedirectToAction("BookAppointment");
             }
-            
 
             var appointment = new Appointment
             {
-                DoctorId = doctorId,
+                DoctorId = schedule.DoctorId,
                 PatientId = patient.PatientId,
-                Date = date,
-                Time = time,
+                Date = schedule.Date,
+                Time = schedule.TimeSlot,
                 Status = "Pending"
             };
+
+            schedule.IsBooked = true;
 
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
@@ -96,8 +80,7 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return RedirectToAction("Appointments");
         }
 
-
-        //MY APPOINTMENTS 
+        
         public async Task<IActionResult> Appointments()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -111,13 +94,13 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             var appointments = await _context.Appointments
                 .Include(a => a.Doctor)
                 .Where(a => a.PatientId == patient.PatientId)
+                .OrderByDescending(a => a.Date)
                 .ToListAsync();
 
             return View(appointments);
         }
 
-        //
-        // CANCEL APPOINTMENT 
+        
         [HttpPost]
         public async Task<IActionResult> CancelAppointment(int id)
         {
@@ -135,8 +118,19 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
                 return Unauthorized();
 
             appointment.Status = "Cancelled";
+
+            
+            var schedule = await _context.DoctorSchedules.FirstOrDefaultAsync(s =>
+                s.DoctorId == appointment.DoctorId &&
+                s.Date == appointment.Date &&
+                s.TimeSlot == appointment.Time);
+
+            if (schedule != null)
+                schedule.IsBooked = false;
+
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Appointment cancelled.";
             return RedirectToAction("Appointments");
         }
     }

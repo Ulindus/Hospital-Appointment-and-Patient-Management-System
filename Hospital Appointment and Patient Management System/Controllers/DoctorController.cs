@@ -1,4 +1,5 @@
 ﻿using Hospital_Appointment_and_Patient_Management_System.Data;
+using Hospital_Appointment_and_Patient_Management_System.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,35 +13,17 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public DoctorController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public DoctorController(
+            ApplicationDbContext context,
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // Dashboard
         public IActionResult Index()
         {
             return View();
-        }
-
-        // Doctor Appointments
-        public async Task<IActionResult> Appointments()
-        {
-            var user = await _userManager.GetUserAsync(User);
-
-            var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(d => d.IdentityUserId == user.Id);
-
-            if (doctor == null)
-                return Unauthorized();
-
-            var appointments = await _context.Appointments
-                .Include(a => a.Patient)
-                .Where(a => a.DoctorId == doctor.Id)
-                .ToListAsync();
-
-            return View(appointments);
         }
 
         
@@ -49,11 +32,11 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View();
         }
 
-       
         
         [HttpPost]
-        [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> Schedule(string[] AvailableDays, string AvailableTime)
+        public async Task<IActionResult> Schedule(
+            string[] AvailableDays,
+            string AvailableTime)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -63,20 +46,43 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             if (doctor == null)
                 return Unauthorized();
 
-            // Save selected days
-            if (AvailableDays != null && AvailableDays.Length > 0)
-            {
-                doctor.AvailableDays = string.Join(", ", AvailableDays);
-            }
-
-            // Save time
+          
+            doctor.AvailableDays = string.Join(", ", AvailableDays);
             doctor.AvailableTime = AvailableTime;
 
-            _context.Doctors.Update(doctor);
+            
+            foreach (var day in AvailableDays)
+            {
+                var date = GetNextDateForDay(day);
+
+                var schedule = new DoctorSchedule
+                {
+                    DoctorId = doctor.Id,
+                    Date = date,
+                    TimeSlot = AvailableTime,
+                    IsBooked = false
+                };
+
+                _context.DoctorSchedules.Add(schedule);
+            }
+
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Schedule saved successfully!";
-            return RedirectToAction("Index");
+            TempData["Success"] = "Schedule created successfully!";
+            return RedirectToAction("Schedule");
+        }
+
+        
+        private DateTime GetNextDateForDay(string day)
+        {
+            var targetDay = Enum.Parse<DayOfWeek>(day);
+            var today = DateTime.Today;
+
+            int daysUntil = ((int)targetDay - (int)today.DayOfWeek + 7) % 7;
+            if (daysUntil == 0)
+                daysUntil = 7;
+
+            return today.AddDays(daysUntil);
         }
     }
 }

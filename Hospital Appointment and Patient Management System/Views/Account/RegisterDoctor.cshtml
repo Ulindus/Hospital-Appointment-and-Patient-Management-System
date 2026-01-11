@@ -16,41 +16,43 @@
                 }
 
                 <form asp-action="RegisterDoctor" asp-controller="Account" method="post">
-
+                    <div class="mb-3">
+                        <label>Doctor Name</label>
+                        <input type="text" name="name" class="form-control" required />
+                    </div>
                     <div class="mb-3">
                         <label>Email</label>
                         <input type="email" name="email" class="form-control" required />
                     </div>
-
+                    <div class="mb-3">
+                        <label>Specialization</label>
+                        <input type="text" name="specialization" class="form-control" required />
+                    </div>
                     <div class="mb-3">
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" required />
                     </div>
 
-                    <div class="mb-3">
-                        <label>Doctor Name</label>
-                        <input type="text" name="name" class="form-control" required />
-                    </div>
+                    
+
+                    
 
                     <div class="mb-3">
-                        <label>Specialization</label>
-                        <input type="text" name="specialization" class="form-control" required />
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Available Time</label>
-                        <input type="text" name="availableTime" class="form-control" placeholder="09:00 AM - 05:00 PM" required />
+                        <!-- <label>Available Time</label>-->
+                        <!-- <input type="text" name="availableTime" class="form-control" placeholder="09:00 AM - 05:00 PM" required />-->
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Available Days</label>
+                            <!-- <label class="form-label">Available Days</label>-->
 
                         @foreach (var day in new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" })
                         {
-                            <div class="form-check">
+                            <!--<div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="AvailableDays" value="@day" />
-                                <label class="form-check-label">@day</label>
-                            </div>
-                        }
+                                     <label class="form-check-label">@day</label>-->
+                                                        
+                            
+                         }
+
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">
