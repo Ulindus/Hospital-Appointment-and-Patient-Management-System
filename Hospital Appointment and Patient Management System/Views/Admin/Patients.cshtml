@@ -2,23 +2,22 @@
 
 @{
     ViewData["Title"] = "Patients";
-}
-@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h3 class="mb-4">Patients</h3>
 
 <div class="card p-3">
-    <table class="table table-hover">
-        <thead>
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
             <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Phone</th>
+                <th style="width:5%">#</th>
+                <th style="width:35%">Name</th>
+                <th style="width:20%">Gender</th>
+                <th style="width:20%">Phone</th>
             </tr>
         </thead>
+
         <tbody>
             @if (!Model.Any())
             {
@@ -35,10 +34,32 @@
                 {
                     <tr>
                         <td>@i</td>
+
                         <td>@p.Name</td>
-                        <td>@p.Gender</td>
-                        <td>@p.Phone</td>
+
+                        <td>
+                            @if (string.IsNullOrEmpty(p.Gender))
+                            {
+                                <span class="text-muted">Not set</span>
+                            }
+                            else
+                            {
+                                @p.Gender
+                            }
+                        </td>
+
+                        <td>
+                            @if (string.IsNullOrEmpty(p.PhoneNumber))
+                            {
+                                <span class="text-muted">Not provided</span>
+                            }
+                            else
+                            {
+                                @p.PhoneNumber
+                            }
+                        </td>
                     </tr>
+
                     i++;
                 }
             }

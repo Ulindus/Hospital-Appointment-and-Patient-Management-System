@@ -1,48 +1,76 @@
-﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.Doctor>
+﻿@model IEnumerable<Hospital_Appointment_and_Patient_Management_System.Models.Doctor>
 
 @{
     ViewData["Title"] = "Doctors";
-}
-@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="container-fluid mt-4">
+    <h2 class="mb-4">Doctors</h2>
 
-<h3 class="mb-4">Doctors</h3>
+    <div class="card shadow-sm">
+        <div class="card-body">
 
-<div class="card p-3">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Specialization</th>
-                <th>Available Time</th>
-            </tr>
-        </thead>
-        <tbody>
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:5%">#</th>
+                        <th style="width:20%">Name</th>
+                        <th style="width:25%">Specialization</th>
+                        <th style="width:30%">Available Days</th>
+                        <th style="width:20%">Available Time</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        int index = 1;
+                    }
+
+                    @foreach (var doctor in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+
+                            <td>@doctor.Name</td>
+
+                            <td>@doctor.Specialization</td>
+
+                            <td>
+                                @if (string.IsNullOrEmpty(doctor.AvailableDays))
+                                {
+                                    <span class="text-muted">Not set</span>
+                                }
+                                else
+                                {
+                                    @doctor.AvailableDays
+                                }
+                            </td>
+
+                            <td>
+                                @if (string.IsNullOrEmpty(doctor.AvailableTime))
+                                {
+                                    <span class="text-muted">Not set</span>
+                                }
+                                else
+                                {
+                                    @doctor.AvailableTime
+                                }
+                            </td>
+                        </tr>
+
+                        index++;
+                    }
+                </tbody>
+            </table>
+
             @if (!Model.Any())
             {
-                <tr>
-                    <td colspan="4" class="text-center text-muted">
-                        No doctors found
-                    </td>
-                </tr>
+                <div class="alert alert-info text-center mt-3">
+                    No doctors found.
+                </div>
             }
-            else
-            {
-                int i = 1;
-                foreach (var d in Model)
-                {
-                    <tr>
-                        <td>@i</td>
-                        <td>@d.Name</td>
-                        <td>@d.Specialization</td>
-                        <td>@d.AvailableTime</td>
-                    </tr>
-                    i++;
-                }
-            }
-        </tbody>
-    </table>
+
+        </div>
+    </div>
 </div>

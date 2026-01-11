@@ -1,36 +1,145 @@
 ﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.Doctor>
 
-<h3 class="mb-4">Book Appointment</h3>
+<div class="container mt-4">
 
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr>
-            <th>Doctor</th>
-            <th>Specialization</th>
-            <th>Available Time</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold">📅 Book Appointment</h3>
+    </div>
 
-    <tbody>
-        @foreach (var d in Model)
-        {
-            <tr>
-                <td>@d.Name</td>
-                <td>@d.Specialization</td>
-                <td>@d.AvailableTime</td>
-                <td>
-                    <form asp-action="CreateAppointment" method="post" class="d-flex gap-2">
-                        <input type="hidden" name="doctorId" value="@d.Id" />
-                        <input type="date" name="date" class="form-control" required />
-                        <input type="text" name="time" class="form-control"
-                               placeholder="10:00 AM" required />
-                        <button class="btn btn-success btn-sm">
-                            Book
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Doctor</th>
+                        <th>Specialization</th>
+                        <th>Available Days</th>
+                        <th>Available Time</th>
+                        <th style="width:30%">Book</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">
+                                No doctors available at the moment
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var d in Model)
+                        {
+                            <tr>
+                                <!-- Doctor -->
+                                <td class="fw-semibold">@d.Name</td>
+
+                                <!-- Specialization -->
+                                <td>@d.Specialization</td>
+
+                                <!-- Available Days -->
+                                <td>
+                                    @if (string.IsNullOrEmpty(d.AvailableDays))
+                                    {
+                                        <span class="badge bg-secondary">Not set</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info text-dark">
+                                            @d.AvailableDays
+                                        </span>
+                                    }
+                                </td>
+
+                                <!-- Available Time -->
+                                <td>
+                                    @if (string.IsNullOrEmpty(d.AvailableTime))
+                                    {
+                                        <span class="badge bg-secondary">Not set</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">
+                                            @d.AvailableTime
+                                        </span>
+                                    }
+                                </td>
+
+                                <!-- Booking Form -->
+                                <td>
+                                    <form asp-action="CreateAppointment"
+                                          asp-controller="Patient"
+                                          method="post"
+                                          class="d-flex gap-2">
+
+                                        <input type="hidden" name="doctorId" value="@d.Id" />
+
+                                        <input type="date"
+                                               name="date"
+                                               class="form-control form-control-sm appointment-date"
+                                               data-days="@d.AvailableDays"
+                                               required />
+
+                                        <input type="text"
+                                               name="time"
+                                               class="form-control form-control-sm"
+                                               placeholder="10:00 AM"
+                                               required />
+
+                                        <button type="submit"
+                                                class="btn btn-success btn-sm">
+                                            Book
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll(".appointment-date").forEach(input => {
+
+        input.addEventListener("change", function () {
+
+            const allowedDaysText = this.dataset.days;
+            if (!allowedDaysText) return;
+
+            const allowedDays = allowedDaysText
+                .split(",")
+                .map(d => d.trim());
+
+            const selectedDate = new Date(this.value);
+            const selectedDay = selectedDate
+                .toLocaleDateString("en-US", { weekday: "long" });
+
+            if (!allowedDays.includes(selectedDay)) {
+                alert("Doctor is not available on " + selectedDay +
+                      ". Available days: " + allowedDaysText);
+                this.value = "";
+            }
+        });
+    });
+</script>

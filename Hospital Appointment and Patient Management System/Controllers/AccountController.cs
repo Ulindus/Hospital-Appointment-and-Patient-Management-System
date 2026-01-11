@@ -21,14 +21,12 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             _context = context;
         }
 
-        // LOGIN 
-        // GET: /Account/Login
+        
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /Account/Login
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
@@ -55,70 +53,25 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        // GET: /Account/Register
-        public IActionResult Register()
-        {
-            return View();
-        }
 
-        //  LOGOUT
-
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
 
-        // REGISTER DOCTOR 
-        
+        public IActionResult Register()
+        {
+            return View();
+        }
 
-        // GET: /Account/RegisterDoctor
+        
         public IActionResult RegisterDoctor()
         {
             return View();
         }
-        // GET: /Account/RegisterPatient
-        public IActionResult RegisterPatient()
-        {
-            return View();
-        }
 
-        // POST: /Account/RegisterPatient
-        [HttpPost]
-        public async Task<IActionResult> RegisterPatient(
-            string email,
-            string password,
-            string name)
-        {
-            var user = new IdentityUser
-            {
-                UserName = email,
-                Email = email
-            };
-
-            var result = await _userManager.CreateAsync(user, password);
-
-            if (!result.Succeeded)
-            {
-                ViewBag.Error = "Registration failed";
-                return View();
-            }
-
-            await _userManager.AddToRoleAsync(user, "Patient");
-
-            var patient = new Patient
-            {
-                Name = name,
-                IdentityUserId = user.Id
-            };
-
-            _context.Patients.Add(patient);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Login");
-        }
-
-        // POST: /Account/RegisterDoctor
         [HttpPost]
         public async Task<IActionResult> RegisterDoctor(
             string email,
@@ -127,7 +80,6 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             string specialization,
             string availableTime)
         {
-            // 1️⃣ Create Identity user
             var user = new IdentityUser
             {
                 UserName = email,
@@ -138,23 +90,65 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             if (!result.Succeeded)
             {
-                ViewBag.Error = "Doctor user creation failed";
+                ViewBag.Error = string.Join(", ",
+                    result.Errors.Select(e => e.Description));
                 return View();
             }
 
-            // 2️⃣ Assign Doctor role
             await _userManager.AddToRoleAsync(user, "Doctor");
 
-            // 3️⃣ Create Doctor domain record
             var doctor = new Doctor
             {
                 Name = name,
                 Specialization = specialization,
                 AvailableTime = availableTime,
-                IdentityUserId = user.Id   
+                IdentityUserId = user.Id
             };
 
             _context.Doctors.Add(doctor);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Login");
+        }
+
+        public IActionResult RegisterPatient()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterPatient(
+            string email,
+            string password,
+            string name,
+            string phoneNumber, string gender)   
+        {
+            var user = new IdentityUser
+            {
+                UserName = email,
+                Email = email
+            };
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (!result.Succeeded)
+            {
+                ViewBag.Error = string.Join(", ",
+                    result.Errors.Select(e => e.Description));
+                return View();
+            }
+
+            await _userManager.AddToRoleAsync(user, "Patient");
+
+            var patient = new Patient
+            {
+                Name = name,
+                PhoneNumber = phoneNumber,
+                Gender = gender,
+                IdentityUserId = user.Id
+            };
+
+            _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Login");

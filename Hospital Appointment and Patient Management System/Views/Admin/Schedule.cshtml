@@ -1,0 +1,108 @@
+﻿@model List<Hospital_Appointment_and_Patient_Management_System.Models.DoctorSchedule>
+
+@{
+    ViewData["Title"] = "Doctor Schedule";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="mb-4">Doctor Schedule</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<div class="card mb-4 p-3">
+    <form method="post" class="row g-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Doctor</label>
+            <select name="doctorId" class="form-control" required>
+                <option value="">-- Select Doctor --</option>
+                @foreach (var d in ViewBag.Doctors)
+                {
+                    <option value="@d.Id">@d.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Time Slot</label>
+            <input type="text"
+                   name="timeSlot"
+                   class="form-control"
+                   placeholder="09:00 - 10:00"
+                   required />
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary mt-2">
+                ➕ Add Schedule
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="card p-3">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Doctor</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+            }
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@s.Date.ToShortDateString()</td>
+                    <td>@s.TimeSlot</td>
+                    <td>@s.Doctor.Name</td>
+                    <td>
+                        @if (s.IsBooked)
+                        {
+                            <span class="badge bg-danger">Booked</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Available</span>
+                        }
+                    </td>
+                    <td class="d-flex gap-2">
+                        <a asp-action="EditSchedule"
+                           asp-route-id="@s.DoctorScheduleId"
+                           class="btn btn-sm btn-warning">
+                            ✏️ Edit
+                        </a>
+
+                        <form asp-action="DeleteSchedule"
+                              asp-route-id="@s.DoctorScheduleId"
+                              method="post"
+                              onsubmit="return confirm('Delete this schedule?');">
+                            <button class="btn btn-sm btn-danger">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>

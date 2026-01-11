@@ -2,43 +2,92 @@
     ViewData["Title"] = "Patient Registration";
 }
 
-<div class="container mt-5" style="max-width:450px;">
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h3 class="text-center mb-4">Patient Registration</h3>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+    <div class="col-md-5">
 
-            @if (ViewBag.Error != null)
-            {
-                <div class="alert alert-danger">
-                    @ViewBag.Error
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+
+                <h3 class="text-center mb-4 fw-bold">
+                    🧑‍⚕️ Patient Registration
+                </h3>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger text-center">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <form method="post" asp-action="RegisterPatient" asp-controller="Account">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Full Name -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Full Name</label>
+                        <input type="text"
+                               name="name"
+                               class="form-control form-control-lg"
+                               placeholder="Enter your full name"
+                               required />
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Email</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control form-control-lg"
+                               placeholder="example@email.com"
+                               required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel"
+                               name="phoneNumber"
+                               class="form-control"
+                               placeholder="0771234567"
+                               required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <select name="gender" class="form-control" required>
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Password</label>
+                        <input type="password"
+                               name="password"
+                               class="form-control form-control-lg"
+                               placeholder="Create a strong password"
+                               required />
+                    </div>
+
+                  
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Register
+                        </button>
+                    </div>
+                </form>
+
+                <hr class="my-4" />
+
+                <div class="text-center">
+                    <span class="text-muted">Already have an account?</span><br />
+                    <a href="/Account/Login" class="fw-semibold text-decoration-none">
+                        Login here
+                    </a>
                 </div>
-            }
 
-            <form method="post" asp-action="RegisterPatient" asp-controller="Account">
-
-                <div class="mb-3">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" name="name" class="form-control" required />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" required />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" required />
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Register
-                </button>
-            </form>
-
-            <div class="text-center mt-3">
-                <a href="/Account/Login">Already have an account? Login</a>
             </div>
         </div>
+
     </div>
 </div>

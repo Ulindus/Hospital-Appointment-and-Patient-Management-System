@@ -4,6 +4,7 @@ using Hospital_Appointment_and_Patient_Management_System.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital_Appointment_and_Patient_Management_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260111094559_AddGenderToPatient")]
+    partial class AddGenderToPatient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,34 +88,6 @@ namespace Hospital_Appointment_and_Patient_Management_System.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("Hospital_Appointment_and_Patient_Management_System.Models.DoctorSchedule", b =>
-                {
-                    b.Property<int>("DoctorScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorScheduleId"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TimeSlot")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DoctorScheduleId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("Hospital_Appointment_and_Patient_Management_System.Models.Patient", b =>
@@ -361,17 +336,6 @@ namespace Hospital_Appointment_and_Patient_Management_System.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("Hospital_Appointment_and_Patient_Management_System.Models.DoctorSchedule", b =>
-                {
-                    b.HasOne("Hospital_Appointment_and_Patient_Management_System.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
