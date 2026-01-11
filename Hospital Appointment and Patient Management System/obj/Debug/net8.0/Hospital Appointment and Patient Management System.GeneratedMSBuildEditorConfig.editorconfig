@@ -46,12 +46,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9jdG9ycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/powertec/Desktop/bbbb/Hospital Appointment and Patient Management System/Views/Admin/EditSchedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFNjaGVkdWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/powertec/Desktop/bbbb/Hospital Appointment and Patient Management System/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/powertec/Desktop/bbbb/Hospital Appointment and Patient Management System/Views/Admin/Patients.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGF0aWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/powertec/Desktop/bbbb/Hospital Appointment and Patient Management System/Views/Admin/Schedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2NoZWR1bGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/powertec/Desktop/bbbb/Hospital Appointment and Patient Management System/Views/Doctor/Appointments.cshtml]

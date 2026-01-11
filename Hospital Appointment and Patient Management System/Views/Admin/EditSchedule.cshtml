@@ -1,0 +1,56 @@
+﻿@model Hospital_Appointment_and_Patient_Management_System.Models.DoctorSchedule
+
+@{
+    ViewData["Title"] = "Edit Schedule";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="mb-4">Edit Schedule</h3>
+
+<div class="card p-4">
+    <form method="post">
+
+        <input type="hidden"
+               name="doctorScheduleId"
+               value="@Model.DoctorScheduleId" />
+
+        <div class="mb-3">
+            <label class="form-label">Doctor</label>
+            <select name="doctorId" class="form-control" required>
+                @foreach (var d in ViewBag.Doctors)
+                {
+                    <option value="@d.Id" selected="@(d.Id == Model.DoctorId)">
+                        @d.Name
+                    </option>
+
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date"
+                   name="date"
+                   class="form-control"
+                   value="@Model.Date.ToString("yyyy-MM-dd")"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Time Slot</label>
+            <input type="text"
+                   name="timeSlot"
+                   class="form-control"
+                   value="@Model.TimeSlot"
+                   required />
+        </div>
+
+        <button class="btn btn-primary">
+            💾 Update
+        </button>
+
+        <a asp-action="Schedule" class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+</div>

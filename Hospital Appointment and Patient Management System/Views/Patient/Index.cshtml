@@ -1,7 +1,19 @@
-﻿<a asp-action="BookAppointment" class="btn btn-primary mt-2">
-    Book Appointment
-</a>
+﻿<div class="d-flex gap-3 mt-4">
+    <a asp-controller="Patient"
+       asp-action="BookAppointment"
+       class="btn btn-primary btn-lg">
+        📅 Book Appointment
+    </a>
 
-<a asp-action="Appointments" class="btn btn-secondary mt-2">
-    My Appointments
-</a>
+    <a asp-controller="Patient"
+       asp-action="Appointments"
+       class="btn btn-outline-secondary btn-lg">
+        📄 My Appointments
+    </a>
+
+    <a asp-controller="Account"
+       asp-action="Logout"
+       class="btn btn-danger btn-lg">
+        🚪 Logout
+    </a>
+</div>
