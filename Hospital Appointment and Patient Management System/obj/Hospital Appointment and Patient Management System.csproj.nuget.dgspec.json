@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\powertec\\Desktop\\bbbb\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj": {}
+    "C:\\Users\\powertec\\Desktop\\we\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\powertec\\Desktop\\bbbb\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj": {
+    "C:\\Users\\powertec\\Desktop\\we\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\powertec\\Desktop\\bbbb\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj",
+        "projectUniqueName": "C:\\Users\\powertec\\Desktop\\we\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj",
         "projectName": "Hospital Appointment and Patient Management System",
-        "projectPath": "C:\\Users\\powertec\\Desktop\\bbbb\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj",
+        "projectPath": "C:\\Users\\powertec\\Desktop\\we\\Hospital Appointment and Patient Management System\\Hospital Appointment and Patient Management System.csproj",
         "packagesPath": "C:\\Users\\powertec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\powertec\\Desktop\\bbbb\\Hospital Appointment and Patient Management System\\obj\\",
+        "outputPath": "C:\\Users\\powertec\\Desktop\\we\\Hospital Appointment and Patient Management System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
