@@ -2,11 +2,26 @@
 
 <h3 class="mb-4">Book Appointment</h3>
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
 <table class="table table-bordered">
     <thead class="table-light">
         <tr>
             <th>Doctor</th>
             <th>Specialization</th>
+            <th>Available Days</th>
             <th>Available Time</th>
             <th>Action</th>
         </tr>
@@ -16,16 +31,58 @@
         @foreach (var d in Model)
         {
             <tr>
+                <!-- Doctor Name -->
                 <td>@d.Name</td>
+
+                <!-- Specialization -->
                 <td>@d.Specialization</td>
-                <td>@d.AvailableTime</td>
+
+                <!-- Available Days -->
                 <td>
-                    <form asp-action="CreateAppointment" method="post" class="d-flex gap-2">
+                    @if (string.IsNullOrEmpty(d.AvailableDays))
+                    {
+                        <span class="text-muted">Not set</span>
+                    }
+                    else
+                    {
+                        @d.AvailableDays
+                    }
+                </td>
+
+                <!-- Available Time -->
+                <td>
+                    @if (string.IsNullOrEmpty(d.AvailableTime))
+                    {
+                        <span class="text-muted">Not set</span>
+                    }
+                    else
+                    {
+                        @d.AvailableTime
+                    }
+                </td>
+
+                <!-- Action -->
+                <td>
+                    <form asp-action="CreateAppointment"
+                          asp-controller="Patient"
+                          method="post"
+                          class="d-flex gap-2">
+
                         <input type="hidden" name="doctorId" value="@d.Id" />
-                        <input type="date" name="date" class="form-control" required />
-                        <input type="text" name="time" class="form-control"
-                               placeholder="10:00 AM" required />
-                        <button class="btn btn-success btn-sm">
+
+                        <input type="date"
+                               name="date"
+                               class="form-control appointment-date"
+                               data-days="@d.AvailableDays"
+                               required />
+
+                        <input type="text"
+                               name="time"
+                               class="form-control"
+                               placeholder="10:00 AM"
+                               required />
+
+                        <button type="submit" class="btn btn-success btn-sm">
                             Book
                         </button>
                     </form>
@@ -34,3 +91,28 @@
         }
     </tbody>
 </table>
+
+<script>
+    document.querySelectorAll(".appointment-date").forEach(input => {
+
+        input.addEventListener("change", function () {
+
+            const allowedDaysText = this.dataset.days;
+            if (!allowedDaysText) return;
+
+            const allowedDays = allowedDaysText
+                .split(",")
+                .map(d => d.trim());
+
+            const selectedDate = new Date(this.value);
+            const selectedDay = selectedDate
+                .toLocaleDateString("en-US", { weekday: "long" });
+
+            if (!allowedDays.includes(selectedDay)) {
+                alert("Doctor is not available on " + selectedDay +
+                      ". Available days: " + allowedDaysText);
+                this.value = "";
+            }
+        });
+    });
+</script>

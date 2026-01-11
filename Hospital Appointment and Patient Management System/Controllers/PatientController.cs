@@ -42,10 +42,10 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View(doctors);
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(
-            int doctorId, DateTime date, string time)
+    int doctorId, DateTime date, string time)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -54,6 +54,31 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
 
             if (patient == null)
                 return Unauthorized();
+
+            var doctor = await _context.Doctors
+                .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+            if (doctor == null)
+                return NotFound();
+
+            
+            if (!string.IsNullOrEmpty(doctor.AvailableDays))
+            {
+                var selectedDay = date.DayOfWeek.ToString(); // Monday, Tuesday, etc.
+
+                var allowedDays = doctor.AvailableDays
+                    .Split(',')
+                    .Select(d => d.Trim())
+                    .ToList();
+
+                if (!allowedDays.Contains(selectedDay))
+                {
+                    TempData["Error"] =
+                        $"Doctor is not available on {selectedDay}. Available days: {doctor.AvailableDays}";
+                    return RedirectToAction("BookAppointment");
+                }
+            }
+            
 
             var appointment = new Appointment
             {
@@ -67,10 +92,12 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Appointment booked successfully!";
             return RedirectToAction("Appointments");
         }
 
-        // ===================== MY APPOINTMENTS =====================
+
+        //MY APPOINTMENTS 
         public async Task<IActionResult> Appointments()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -89,7 +116,8 @@ namespace Hospital_Appointment_and_Patient_Management_System.Controllers
             return View(appointments);
         }
 
-        // ===================== CANCEL APPOINTMENT =====================
+        //
+        // CANCEL APPOINTMENT 
         [HttpPost]
         public async Task<IActionResult> CancelAppointment(int id)
         {
