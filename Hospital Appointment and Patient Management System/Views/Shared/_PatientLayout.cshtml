@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Hospital System</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <!-- TOP NAV -->
+    <nav class="navbar navbar-dark bg-primary px-4">
+        <span class="navbar-brand">🏥 Hospital System</span>
+
+        <!-- LOGOUT ONLY FOR PATIENT -->
+        <form asp-controller="Account"
+              asp-action="Logout"
+              method="post">
+            <button type="submit" class="btn btn-primary">
+                🚪 Logout
+            </button>
+        </form>
+    </nav>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

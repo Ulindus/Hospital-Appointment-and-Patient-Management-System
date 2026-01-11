@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Hospital_Appointment_and_Patient_Management_System.Models.Doctor
+
+@{
     ViewData["Title"] = "Doctor Schedule";
 }
 
@@ -20,6 +22,10 @@
                         </div>
                     }
 
+                    @{
+                        var selectedDays = Model?.AvailableDays?.Split(", ") ?? new string[] { };
+                    }
+
                     <form method="post">
                         @Html.AntiForgeryToken()
 
@@ -38,7 +44,8 @@
                                                    type="checkbox"
                                                    name="AvailableDays"
                                                    value="@day"
-                                                   id="@day" />
+                                                   id="@day"
+                                                   @(selectedDays.Contains(day) ? "checked" : "") />
                                             <label class="form-check-label" for="@day">
                                                 @day
                                             </label>
@@ -56,6 +63,7 @@
                             <input type="text"
                                    name="AvailableTime"
                                    class="form-control"
+                                   value="@Model?.AvailableTime"
                                    placeholder="09:00 AM - 05:00 PM"
                                    required />
                         </div>
