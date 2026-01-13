@@ -2,22 +2,19 @@
 
 @{
     Layout = "~/Views/Shared/_DoctorLayout.cshtml";
-    ViewData["Title"] = "My Appointments";
+    ViewData["Title"] = "Today's Appointments";
 }
 
 <div class="container mt-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold">📋 My Appointments</h3>
-    </div>
+    <h3 class="fw-bold mb-4">📅 Today’s Appointments</h3>
 
-    <div class="card shadow-sm border-0">
+    <div class="card shadow-sm">
         <div class="card-body">
 
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>Date</th>
                         <th>Time</th>
                         <th>Patient</th>
                         <th>Status</th>
@@ -28,8 +25,8 @@
                     @if (!Model.Any())
                     {
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">
-                                No appointments found
+                            <td colspan="3" class="text-center text-muted py-4">
+                                No appointments today
                             </td>
                         </tr>
                     }
@@ -38,12 +35,6 @@
                         foreach (var a in Model)
                         {
                             <tr>
-                                <td>
-                                    <span class="badge bg-info text-dark">
-                                        @a.Date.ToString("yyyy-MM-dd")
-                                    </span>
-                                </td>
-
                                 <td>
                                     <span class="badge bg-secondary">
                                         @a.Time
@@ -63,13 +54,9 @@
                                     {
                                         <span class="badge bg-success">Approved</span>
                                     }
-                                    else if (a.Status == "Cancelled")
-                                    {
-                                        <span class="badge bg-danger">Cancelled</span>
-                                    }
                                     else
                                     {
-                                        <span class="badge bg-secondary">@a.Status</span>
+                                        <span class="badge bg-danger">@a.Status</span>
                                     }
                                 </td>
                             </tr>
